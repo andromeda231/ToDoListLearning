@@ -9,12 +9,16 @@ export default function NoteSummery(props) {
         onClick={() => props.setCurrentNoteId(note.id)}
       >
         <a
-          href="#"
-          class="list-group-item list-group-item-action active"
+          className="list-group-item list-group-item-action"
           aria-current="true"
         >
           <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">{note.body.split("\n")[0]}</h5>
+            <h5 className="mb-1">
+              <Button onClick={(event) => props.deleteNote(event, note.id)}>
+                -
+              </Button>
+              {note.body.split("\n")[0]}
+            </h5>
             <small>3 days ago</small>
           </div>
           <p className="mb-1">{note.body.split("\n")[1]}</p>
@@ -25,13 +29,19 @@ export default function NoteSummery(props) {
   ));
 
   return (
-    <section className="pane sidebar sticky">
-      <div className="d-grid gap-2 newNote">
-        <Button variant="primary" size="lg" onClick={props.newNote}>
-          New ToDo
-        </Button>
-      </div>
-      <div>{noteElements}</div>
-    </section>
+    <div>
+      <nav className="navbar sticky-top bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            <span onClick={props.newNote} className="badge text-bg-info">
+              +
+            </span>
+          </a>
+        </div>
+      </nav>
+      <section classNameName="pane sidebar sticky">
+        <div>{noteElements}</div>
+      </section>
+    </div>
   );
 }
